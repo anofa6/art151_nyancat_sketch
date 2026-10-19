@@ -5,12 +5,11 @@
 //please add a comment to what was fixed or adjusted for each one. Note that you may need to delete stuff. 
 let nyan;
 let noNyan;
- nyanBg; 
-let variable; 
+// Added let to variable declaration //
+// removed unused variables //
 let circles = [];
 
-
-let color = [
+let colors = [
  [255, 0, 0],     // red 
   [255, 165, 0],   // orange 
   [255, 255, 0],   // yellow
@@ -20,7 +19,8 @@ let color = [
   [150, 150, 150], // grey 
   [100, 100, 100], // darker grey 
   [255, 182, 193], // pink 
-  [255, , 180], // hot pink 
+  // Added value to hot ping RGB
+  [255, 105, 180], // hot pink 
   [255, 228, 181], // beige 
   [0, 0, 0],       // black 
   [255, 255, 255]  // white 
@@ -31,29 +31,36 @@ let playbackRate = 1.0;
 
 async function setup() {
   createCanvas(400, 400);
-background(noNyan);
-   nyan = await loadSound('media/NyanCat.mp3');
-  noNyan = await loadImage('media/NyanCatless.gif')
-  sprinkles = await loadImage('sprinkles.jpg'); 
+  // Changed media to medias, removed capitalization of Nyan
+   nyan = await createAudio('medias/nyanCat.mp3');
+  noNyan = await loadImage('medias/nyancatless.gif');
+  // Removed sprinkles //
+  // sprinkles = await loadImage('medias/sprinkles.jpg'); 
  
 }
 
 function draw() {
-
+  // moved noNyan to draw function //
+  background(noNyan);
   
   // Draw all circles
-  for (let circle of circels) { 
-    fill(circle.colors); 
-    elipse(circle.x, circle.y, 50, 50); 
+  // circles is misspelled //
+  for (let circle of circles) { 
+    // change to circle color //
+    fill(circle.color); 
+    // ellipse is spelled wrong //
+    ellipse(circle.x, circle.y, 50, 50); 
   }
   
-
+  // remove mouseIsPressed (done in function below) //
   if (mouseIsPressed) {
     let c = random(colors); 
-    let new Circle = { 
-      x: MouseX, 
+    // Removed spacing between newCircle //
+    let newCircle = { 
+      x: mouseX, 
       y: mouseY,
-      colors: color(c(0), c[1], c[2]) 
+      // changed colors to color //
+      color: color(c[0], c[1], c[2]) 
     };
     circles.push(newCircle);
   }
@@ -67,28 +74,41 @@ function mousePressed() {
     color: color(c[0], c[1], c[2])
   };
   circles.push(newCircle);
-  nayn.setVolume(0.5); 
-  nyan.rate(playbakRate); 
-   nyan.loop();
+  mouseIsPressed = true;
+  // misspelled nyan //
+  // change to volume //
+  nyan.play();
+  nyan.volume(0.1); 
+  // playback misspelled //
+  nyan.speed(playbackRate); 
+  nyan.loop();
   
 }
 function mouseReleased(){
   nyan.stop();
-
+  // Added End Curly Bracket //
+}
 
 
 function keyPressed() {
-  if (keycode = UP_ARROW); { 
-    playBackRate += 0.1; 
-    nyan.rate(playbackRate); 
-  } else  (keyCode == Down_Arrow) { 
+  // c in keyCode needs to be capitalized //
+  // triple equal for all conditions //
+  // removed semmicolon after if //
+  // changed rate to speed //
+  if (key === UP_ARROW) { 
+    // playbackrate misspelled //
+    playbackRate += 0.1; 
+    nyan.speed(playbackRate); 
+    // add if //
+    // down arrows needs to be all caps //
+  } else if (key === DOWN_ARROW) { 
     playbackRate = max(0.1, playbackRate - 0.2); 
-    nyan.rate(playbackRate);
-  } else if (keyCode === LEFT_ARROW) { 
-    playbackRate = playbackRate * 1; 
-    nyan.rate(playBackRate); 
+    nyan.speed(playbackRate);
+  } else if (key === LEFT_ARROW) { 
+    // set playback rate to default //
+    playbackRate = 1; 
+    // playback rate misspelled //
+    nyan.speed(playbackRate); 
   }
 }
-}
-} 
-}
+// Removed Extra Curly Brackets //
